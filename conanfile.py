@@ -29,21 +29,19 @@ class KFRConan(ConanFile):
     def _build_subfolder(self):
         return "build_subfolder"
 
-    def config_options(self):
-        if self.options.header_only:
-            del self.options.shared
-            del self.options.fPIC
-        elif not self.options.header_only and self.settings.os == "Windows":
-            del self.options.fPIC
-
     def configure(self):
         if self.options.dft and self.options.header_only:
             raise ConanInvalidConfiguration("DFT can not be built with header-only")
+        if self.options.dft and (self.settings.compiler != "clang" and self.settings.compiler != "apple-clang"):
+            raise ConanInvalidConfiguration("DFT option is only compatible with Clang")
+
         if self.options.header_only:
             self.settings.clear()
+            del self.options.shared
+            del self.options.fPIC
             del self.options.dft
-        elif self.options.dft and (self.settings.compiler != "clang" and self.settings.compiler != "apple-clang"):
-            raise ConanInvalidConfiguration("DFT option is only compatible with Clang")
+        elif not self.options.header_only and self.settings.os == "Windows":
+            del self.options.fPIC
 
     def source(self):
         sha256 = "71ff6b62db268d76acd5ebf720b3f4d0786de59fea02fcabb30bb7121ce82d15"
