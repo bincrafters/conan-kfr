@@ -18,7 +18,7 @@ class KFRConan(ConanFile):
     options = {"dft": [True, False], "header_only": [True, False], "shared": [True, False], "fPIC": [True, False]}
     default_options = {"dft": False, "header_only": True, "shared": False, "fPIC": True}
     exports = ["LICENSE.md"]
-    exports_sources = "CMakeLists.txt"
+    exports_sources = ["CMakeLists.txt", "0001-lib.patch"]
     generators = "cmake"
 
     @property
@@ -58,6 +58,7 @@ class KFRConan(ConanFile):
 
     def build(self):
         if not self.options.header_only:
+            tools.patch(base_path=self._source_subfolder, patch_file="0001-lib.patch")
             cmake = self._configure_cmake()
             cmake.build()
 
