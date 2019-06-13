@@ -1,6 +1,5 @@
 env:
    global:
-     - CONAN_DOCKER_32_IMAGES: 1
      - CONAN_TOTAL_PAGES: 2
 
 linux: &linux
@@ -16,13 +15,13 @@ osx: &osx
 matrix:
    include:
       - <<: *linux
+        env: CONAN_CLANG_VERSIONS=8 CONAN_DOCKER_IMAGE=conanio/clang8 CONAN_OPTIONS="kfr:header_only=False,kfr:dft=True"
+      - <<: *linux
         env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=conanio/gcc8
       - <<: *linux
-        env: CONAN_CLANG_VERSIONS=6.0 CONAN_DOCKER_IMAGE=conanio/clang60 CONAN_OPTIONS="kfr:header_only=False,kfr:dft=True"
+        env: CONAN_CLANG_VERSIONS=6.0 CONAN_DOCKER_IMAGE=conanio/clang60 CONAN_OPTIONS="kfr:header_only=False,kfr:dft=True" CONAN_DOCKER_32_IMAGES=1
       - <<: *linux
-        env: CONAN_CLANG_VERSIONS=7.0 CONAN_DOCKER_IMAGE=conanio/clang7 CONAN_OPTIONS="kfr:header_only=False,kfr:dft=True"
-      - <<: *linux
-        env: CONAN_CLANG_VERSIONS=8 CONAN_DOCKER_IMAGE=conanio/clang8 CONAN_OPTIONS="kfr:header_only=False,kfr:dft=True"
+        env: CONAN_CLANG_VERSIONS=7.0 CONAN_DOCKER_IMAGE=conanio/clang7 CONAN_OPTIONS="kfr:header_only=False,kfr:dft=True" CONAN_DOCKER_32_IMAGES=1
       - <<: *osx
         osx_image: xcode8.3
         env: CONAN_APPLE_CLANG_VERSIONS=8.1 CONAN_OPTIONS="kfr:header_only=False,kfr:dft=True"
