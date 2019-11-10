@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import os
 from conans import ConanFile, tools, CMake
 from conans.errors import ConanInvalidConfiguration
@@ -12,7 +10,6 @@ class KFRConan(ConanFile):
     topics = ("conan", "kfr", "avx", "fft", "audio", "dsp")
     url = "https://github.com/bincrafters/conan-kfr"
     homepage = "https://github.com/kfrlib/kfr"
-    author = "Bincrafters <bincrafters@gmail.com>"
     license = "GPL-2.0"
     settings = "build_type", "os", "compiler", "arch"
     options = {"dft": [True, False], "header_only": [True, False], "shared": [True, False], "fPIC": [True, False]}
