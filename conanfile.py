@@ -5,7 +5,6 @@ from conans.errors import ConanInvalidConfiguration
 
 class KFRConan(ConanFile):
     name = "kfr"
-    version = "3.0.9"
     description = "Fast, modern C++ DSP framework, FFT, Sample Rate Conversion, FIR/IIR/Biquad Filters"
     topics = ("conan", "kfr", "avx", "fft", "audio", "dsp")
     url = "https://github.com/bincrafters/conan-kfr"
@@ -14,7 +13,6 @@ class KFRConan(ConanFile):
     settings = "build_type", "os", "compiler", "arch"
     options = {"dft": [True, False], "header_only": [True, False], "shared": [True, False], "fPIC": [True, False]}
     default_options = {"dft": False, "header_only": True, "shared": False, "fPIC": True}
-    exports = ["LICENSE.md"]
     exports_sources = ["CMakeLists.txt", "0001-lib.patch"]
     generators = "cmake"
 
@@ -41,8 +39,7 @@ class KFRConan(ConanFile):
             del self.options.fPIC
 
     def source(self):
-        sha256 = "71ff6b62db268d76acd5ebf720b3f4d0786de59fea02fcabb30bb7121ce82d15"
-        tools.get("{0}/archive/{1}.tar.gz".format(self.homepage, self.version), sha256=sha256)
+        tools.get(**self.conan_data["sources"][self.version])
         extracted_dir = self.name + "-" + self.version
         os.rename(extracted_dir, self._source_subfolder)
 
@@ -83,5 +80,3 @@ class KFRConan(ConanFile):
 
         if tools.os_info.is_linux:
             self.cpp_info.libs.extend(["pthread", "m"])
-
-
