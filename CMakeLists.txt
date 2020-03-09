@@ -4,5 +4,4 @@ project(cmake_wrapper)
 include(conanbuildinfo.cmake)
 conan_basic_setup()
 
-message(STATUS "Conan CMake Wrapper")
 add_subdirectory("source_subfolder")

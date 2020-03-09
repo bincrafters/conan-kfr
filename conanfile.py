@@ -9,7 +9,7 @@ class KFRConan(ConanFile):
     topics = ("conan", "kfr", "avx", "fft", "audio", "dsp")
     url = "https://github.com/bincrafters/conan-kfr"
     homepage = "https://github.com/kfrlib/kfr"
-    license = "GPL-2.0"
+    license = "GPL-2.0-or-later"
     settings = "build_type", "os", "compiler", "arch"
     options = {"dft": [True, False], "header_only": [True, False], "shared": [True, False], "fPIC": [True, False]}
     default_options = {"dft": False, "header_only": True, "shared": False, "fPIC": True}
