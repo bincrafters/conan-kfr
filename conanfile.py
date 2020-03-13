@@ -26,7 +26,7 @@ class KFRConan(ConanFile):
         return "build_subfolder"
 
     def configure(self):
-        if (self.settings.compiler == "gcc" and Version(self.settings.compiler.version) < "5.4") or (self.settings.compiler == "clang" and Version(self.settings.compiler.version) < "4.0"):
+        if (self.settings.compiler == "gcc" and Version(self.settings.compiler.version) < "5") or (self.settings.compiler == "clang" and Version(self.settings.compiler.version) < "5"):
             raise ConanInvalidConfiguration(
                 "kfr can't be build with {} {}".format(self.settings.compiler, self.settings.compiler.version))
 
